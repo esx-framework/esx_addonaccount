@@ -7,7 +7,6 @@ description 'ESX Addon Account'
 lua54 'yes'
 version '1.0' 
 legacyversion '1.9.1'
-server_only 'yes'
 
 server_scripts {
 	'@es_extended/imports.lua',
