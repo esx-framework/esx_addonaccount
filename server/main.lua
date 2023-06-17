@@ -44,6 +44,28 @@ function GetSharedAccount(name)
 	return SharedAccounts[name]
 end
 
+function AddSharedAccount(society, amount)
+    if type(society) ~= 'table' or not society?.name or not society?.label then return end
+    -- society.name = job_name/society_name
+    -- society.label = label for the job/account
+    -- amount = if the shared account should start with x amount
+
+    -- addon account:
+    local account = MySQL.insert.await('INSERT INTO `addon_account` (name, label, shared) VALUES (?, ?, ?)', {
+        society.name, society.label, 1
+    })
+    if not account then return end
+
+    -- if addon account inserted, insert addon account data:
+    local account_data = MySQL.insert.await('INSERT INTO `addon_account_data` (account_name, money) VALUES (?, ?)', {
+        society.name, (amount or 0)
+    })
+    if not account_data then return end
+	
+    -- if all data inserted successfully to sql:
+    SharedAccounts[society.name] = CreateAddonAccount(society.name, nil, (amount or 0))
+end
+
 AddEventHandler('esx_addonaccount:getAccount', function(name, owner, cb)
 	cb(GetAccount(name, owner))
 end)
