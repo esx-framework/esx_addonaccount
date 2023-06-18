@@ -21,7 +21,7 @@ AddEventHandler('onResourceStart', function(resourceName)
 				end
 			end
 		end
-		GlobalState.AddonAccount.SharedAccounts = SharedAccounts
+		GlobalState['AddonAccount']:set('SharedAccounts', SharedAccounts, true)
 
 		if next(newAccounts) then
 			MySQL.prepare('INSERT INTO addon_account_data (account_name, money) VALUES (?, ?)', newAccounts)
@@ -29,7 +29,7 @@ AddEventHandler('onResourceStart', function(resourceName)
 				local newAccount = newAccounts[i]
 				SharedAccounts[newAccount[1]] = CreateAddonAccount(newAccount[1], nil, 0)
 			end
-			GlobalState.AddonAccount.SharedAccounts = SharedAccounts
+			GlobalState['AddonAccount']:set('SharedAccounts', SharedAccounts, true)
 		end
 	end
 end)
