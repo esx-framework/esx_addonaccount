@@ -18,6 +18,7 @@ An addon account must be configured in the database before using it. Don't forge
 | name of the account | label of the account (not used) | is the account shared with others? (boolean either `0` or `1`) |
 
 ```lua
+-- Using events
 TriggerEvent('esx_addonaccount:getSharedAccount', 'society_realestateagent', function(account)
   account.addMoney(500)
 end)
@@ -25,6 +26,13 @@ end)
 TriggerEvent('esx_addonaccount:getAccount', 'property_black_money', 'steam:0123456789', function(account)
   account.removeMoney(500)
 end)
+
+-- Using exports
+local account = exports['esx_addonaccount']:getAccount('property_black_money', 'steam:0123456789')
+account.addMoney(500)
+
+local sharedAccount = exports['esx_addonaccount']:getSharedAccount('society_realestateagent')
+sharedAccount.addMoney(500)
 ```
 
 # Legal
