@@ -139,6 +139,6 @@ AddEventHandler('esx_addonaccount:refreshAccounts', function()
 	end
 end)
 
-exports('getAccount', GetSharedAccount)
+exports('getAccount', GetAccount)
 
 exports('getSharedAccount', GetSharedAccount)
