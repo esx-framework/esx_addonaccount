@@ -15,7 +15,8 @@ server_scripts {
 
 server_exports {
     'GetSharedAccount',
-    'AddSharedAccount'
+    'AddSharedAccount',
+    'GetAccount'
 }
 
 dependency 'es_extended'
